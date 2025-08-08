@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eltica - Training Center Management Platform</title>
+    <title>ELTica - The Future of ELT Training Management</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Inter font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Load Inter and Poppins fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     <!-- Load Lucide icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Load EmailJS -->
@@ -51,11 +51,6 @@
                             '0%, 100%': { boxShadow: '0 0 20px rgba(121, 80, 242, 0.3)' },
                             '50%': { boxShadow: '0 0 40px rgba(121, 80, 242, 0.6)' },
                         }
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-                        'mesh-gradient': 'linear-gradient(135deg, #7950F2 0%, #4ECDC4 50%, #9B7EF5 100%)',
                     }
                 }
             }
@@ -65,9 +60,12 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
         .glass-effect {
             backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
         }
         .animated-section {
             opacity: 0;
@@ -82,14 +80,45 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .feature-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
         .mobile-menu {
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: translateX(100%);
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, #7950F2 0%, #6841E0 100%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .mobile-menu.is-open {
-            transform: translateX(0);
+            transform: translateY(0);
+        }
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .mobile-menu-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .form-input {
+            transition: all 0.3s ease;
         }
         .form-input:focus {
             box-shadow: 0 0 0 3px rgba(121, 80, 242, 0.1);
@@ -102,10 +131,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .mesh-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            opacity: 0.05;
-        }
         .floating-shape {
             position: absolute;
             border-radius: 50%;
@@ -115,9 +140,82 @@
         .floating-shape:nth-child(1) { animation-delay: 0s; }
         .floating-shape:nth-child(2) { animation-delay: 2s; }
         .floating-shape:nth-child(3) { animation-delay: 4s; }
+        .diagonal-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: inherit;
+            transform: skewY(-2deg);
+            transform-origin: top left;
+        }
+        .diagonal-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: inherit;
+            transform: skewY(-2deg);
+            transform-origin: bottom left;
+        }
+        .value-prop-card {
+            animation: slideUp 0.6s ease-out forwards;
+            animation-delay: var(--delay);
+            opacity: 0;
+        }
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .modal.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            width: 400px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal.is-open .modal-content {
+            transform: scale(1);
+        }
+        nav a:hover {
+            transform: translateY(-2px);
+        }
+        .icon-hover {
+            transition: all 0.3s ease;
+        }
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 overflow-x-hidden">
+<body class="bg-gray-100 text-gray-800 overflow-x-hidden">
     
     <!-- Floating Background Shapes -->
     <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -126,353 +224,539 @@
         <div class="floating-shape w-80 h-80 -bottom-40 left-1/4"></div>
     </div>
 
+    <!-- Cambridge Launch Banner -->
+    <div class="bg-gradient-to-r from-primary via-primary-dark to-accent text-white py-2 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-white/10 animate-pulse"></div>
+        <div class="relative z-10 flex items-center justify-center px-4">
+            <i data-lucide="graduation-cap" class="w-4 h-4 mr-2 hidden sm:inline"></i>
+            <span class="text-xs sm:text-sm font-semibold">
+                Historic Launch at Cambridge University | Clare College | Sept 13, 2025
+            </span>
+          
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu md:hidden">
+        <button id="mobileMenuClose" class="absolute top-4 right-4 text-white p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        
+        <div class="text-center text-white px-8">
+            <h2 class="text-3xl font-bold mb-2">ELTica</h2>
+            <p class="text-sm opacity-90 mb-8">The new standard for ELT training management.</p>
+            
+            <nav class="space-y-4 mb-8">
+                <a href="#features" class="block text-lg font-medium hover:scale-105 transition-transform">Features</a>
+                <a href="#for-centers" class="block text-lg font-medium hover:scale-105 transition-transform">For Centers</a>
+                <a href="#for-trainees" class="block text-lg font-medium hover:scale-105 transition-transform">For Trainees</a>
+                <a href="#benefits" class="block text-lg font-medium hover:scale-105 transition-transform">Why ELTica</a>
+                <a href="#contact" class="block text-lg font-medium hover:scale-105 transition-transform">Contact</a>
+            </nav>
+            
+            <div class="bg-white/20 backdrop-blur rounded-xl p-4 mb-8">
+                <p class="text-sm font-semibold mb-2">Cambridge Launch</p>
+                <p class="text-xs opacity-90">Clare College • Sept 13, 2025</p>
+            </div>
+            
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                </a>
+                <a href="#" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                    <i data-lucide="facebook" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content text-center">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="check-circle" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Thank You!</h3>
+            <p class="text-gray-600 mb-6">We've received your message and will be in touch shortly.</p>
+            <button id="closeModal" class="bg-gradient-to-r from-primary to-primary-dark text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all">
+                Close
+            </button>
+        </div>
+    </div>
+
     <!-- Header & Navigation -->
     <header class="glass-effect shadow-lg sticky top-0 z-50 border-b border-gray-200/50">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#" class="text-3xl font-black gradient-text hover:scale-105 transition-transform duration-300">
-                Eltica
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold gradient-text hover:scale-105 transition-transform duration-300">
+                ELTica
             </a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#features" class="text-gray-600 hover:text-primary font-medium transition-all duration-300 hover:scale-105">Features</a>
-                <a href="#benefits" class="text-gray-600 hover:text-primary font-medium transition-all duration-300 hover:scale-105">Benefits</a>
-                <a href="#contact" class="text-gray-600 hover:text-primary font-medium transition-all duration-300 hover:scale-105">Contact</a>
-                <a href="#contact" class="bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300 animate-pulse-glow">
-                    Get Started
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#features" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">Features</a>
+                <a href="#for-centers" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">For Centers</a>
+                <a href="#for-trainees" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">For Trainees</a>
+                <a href="#benefits" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">Why ELTica</a>
+                <a href="#contact" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">Contact</a>
+                <a href="#contact" class="bg-gradient-to-r from-primary to-accent text-white px-5 py-2 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
+                    Join the Future
                 </a>
             </div>
             <!-- Mobile Menu Button -->
-            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300" aria-label="Toggle menu">
+            <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300">
                 <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
             </button>
         </nav>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 glass-effect shadow-2xl p-6 md:hidden z-50 border-l border-gray-200/50">
-            <div class="flex justify-end">
-                <button id="closeMenuBtn" class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300">
-                    <i data-lucide="x" class="w-6 h-6 text-gray-600"></i>
-                </button>
-            </div>
-            <div class="mt-8 space-y-6 flex flex-col items-center">
-                <a href="#features" class="text-gray-700 hover:text-primary text-xl font-medium transition-all duration-300 hover:scale-105" onclick="closeMobileMenu()">Features</a>
-                <a href="#benefits" class="text-gray-700 hover:text-primary text-xl font-medium transition-all duration-300 hover:scale-105" onclick="closeMobileMenu()">Benefits</a>
-                <a href="#contact" class="text-gray-700 hover:text-primary text-xl font-medium transition-all duration-300 hover:scale-105" onclick="closeMobileMenu()">Contact</a>
-                <a href="#contact" class="mt-6 bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300" onclick="closeMobileMenu()">Get Started</a>
-            </div>
-        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-20 md:py-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 overflow-hidden">
-        <div class="absolute inset-0 mesh-bg"></div>
+    <section class="relative py-20 md:py-32 bg-gradient-to-br from-gray-100 via-white to-gray-100 overflow-hidden">
         <div class="container mx-auto px-4 text-center relative z-10">
             <div class="max-w-4xl mx-auto">
-                <div class="inline-flex items-center px-4 py-2 bg-white/80 border border-primary/20 rounded-full text-primary font-semibold text-sm mb-8 shadow-lg animated-section">
+                <div class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary to-accent text-white rounded-full font-semibold text-sm mb-6 shadow-lg animated-section animate-pulse-glow">
                     <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
-                    Launching September 2024 - Join the Revolution
+                    Launching at Cambridge University • September 13, 2025
                 </div>
-                <h1 class="text-5xl md:text-7xl font-black text-gray-900 leading-tight mb-6 animated-section">
-                    Streamline Your 
-                    <span class="gradient-text">Training Center</span>
-                    Operations
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-4 animated-section">
+                    Where <span class="gradient-text">Future Teachers</span> Meet the Training They Deserve
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10 leading-relaxed animated-section">
-                    The most advanced all-in-one platform for managing courses, applications, AI-powered assessments, and student communication. Transform your educational operations today.
+                <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed animated-section">
+                    One intelligent platform that brings training centers and trainees together to connect with purpose, collaborate without barriers, and move forward with clarity. No wasted time. No repeated work. No roadblocks. Just the shortest path from potential to achievement.
                 </p>
+                
+      
+
+                <!-- Cambridge Launch Event - Minimal -->
+                <div class="bg-white border border-primary/20 rounded-xl p-5 max-w-2xl mx-auto mb-8 shadow-lg animated-section">
+                    <div class="text-center mb-4">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">
+                            Launching at <span class="gradient-text">Cambridge University</span>
+                        </h3>
+                        <div class="flex items-center justify-center space-x-4 text-sm text-gray-600">
+                            <div class="flex items-center">
+                                <i data-lucide="map-pin" class="w-4 h-4 mr-1 text-primary"></i>
+                                <span>Clare College | Elton Bowring Room</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i data-lucide="calendar" class="w-4 h-4 mr-1 text-primary"></i>
+                                <span>Sept 13, 2025 | 15:30 GMT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="countdown" class="grid grid-cols-4 gap-3 text-center">
+                        <div class="bg-gray-50 rounded-lg p-2">
+                            <div id="days" class="text-xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-600">Days</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-2">
+                            <div id="hours" class="text-xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-600">Hours</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-2">
+                            <div id="minutes" class="text-xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-600">Minutes</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-2">
+                            <div id="seconds" class="text-xl font-bold text-primary">00</div>
+                            <div class="text-xs text-gray-600">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animated-section">
-                    <a href="#features" class="group bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center">
-                        <span>Discover Features</span>
-                        <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                    <a href="#for-centers" class="bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-3.5 rounded-full text-sm font-semibold shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300">
+                        Explore Solutions
                     </a>
-                    <a href="#benefits" class="group bg-white/80 backdrop-blur text-gray-800 px-8 py-4 rounded-full text-lg font-bold border border-gray-200 hover:border-primary/30 hover:bg-white transition-all duration-300 flex items-center">
-                        <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
-                        <span>Watch Demo</span>
+                    <a href="https://youtu.be/fhpTOYQVLUc" class="bg-white/80 text-gray-800 px-8 py-3.5 rounded-full text-sm font-semibold border-2 border-gray-300 hover:border-primary/30 hover:bg-white transition-all duration-300">
+                        Watch Demo
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Centers Section -->
+    <section id="for-centers" class="relative py-20 md:py-24 bg-white diagonal-section">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <div class="animated-section">
+                    <div class="inline-flex items-center px-3 py-1 bg-primary/10 text-primary rounded-full font-medium text-xs mb-4">
+                        <i data-lucide="building" class="w-3 h-3 mr-1.5"></i>
+                        For Training Centers
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Control Without <span class="gradient-text">Chaos</span>
+                    </h2>
+                    <p class="text-base text-gray-600 mb-6 leading-relaxed">
+                        Stop juggling spreadsheets, inboxes, and calendars. Publish courses once and keep everything — candidate profiles, conversations, documents, and outcomes — in one intelligent, secure platform.
+                    </p>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <i data-lucide="check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 mb-1">Streamlined Operations</h4>
+                                <p class="text-sm text-gray-600">Free your team from administrative loops to focus on what matters.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <i data-lucide="brain" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 mb-1">AI-Powered Intelligence</h4>
+                                <p class="text-sm text-gray-600">Automated prescreening and smart routing for faster decisions.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <i data-lucide="lock" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-base font-semibold text-gray-900 mb-1">Complete Security</h4>
+                                <p class="text-sm text-gray-600">Enterprise-grade protection with comprehensive audit trails.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 animated-section">
+                    <div class="text-center p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+                        <div class="text-2xl font-bold gradient-text mb-1">80%</div>
+                        <div class="text-sm font-medium text-gray-600">Time Saved</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+                        <div class="text-2xl font-bold gradient-text mb-1">100%</div>
+                        <div class="text-sm font-medium text-gray-600">Centralized</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+                        <div class="text-2xl font-bold gradient-text mb-1">24/7</div>
+                        <div class="text-sm font-medium text-gray-600">Available</div>
+                    </div>
+                    <div class="text-center p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-xl border border-primary/10">
+                        <div class="text-2xl font-bold gradient-text mb-1">∞</div>
+                        <div class="text-sm font-medium text-gray-600">Scalable</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Trainees Section -->
+    <section id="for-trainees" class="relative py-20 md:py-24 bg-gradient-to-br from-gray-100 to-white diagonal-section">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                <div class="order-2 lg:order-1 animated-section">
+                    <div class="p-6 bg-white rounded-xl shadow-lg border border-gray-100 mb-4">
+                        <div class="w-12 h-12 bg-accent/20 text-accent rounded-lg flex items-center justify-center mb-3">
+                            <i data-lucide="compass" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="text-base font-semibold text-gray-900 mb-2">Your Journey, Simplified</h4>
+                        <p class="text-sm text-gray-600">From first inquiry to final certificate — everything in one account you control.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-white rounded-xl shadow-lg border border-gray-100">
+                            <i data-lucide="clock" class="w-5 h-5 text-green-600 mb-2"></i>
+                            <h5 class="text-sm font-semibold text-gray-900">Real-Time Updates</h5>
+                        </div>
+                        <div class="p-4 bg-white rounded-xl shadow-lg border border-gray-100">
+                            <i data-lucide="message-circle" class="w-5 h-5 text-blue-600 mb-2"></i>
+                            <h5 class="text-sm font-semibold text-gray-900">Direct Communication</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 animated-section">
+                    <div class="inline-flex items-center px-3 py-1 bg-accent/10 text-accent rounded-full font-medium text-xs mb-4">
+                        <i data-lucide="graduation-cap" class="w-3 h-3 mr-1.5"></i>
+                        For Future Teachers
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Progress Without <span class="gradient-text">Friction</span>
+                    </h2>
+                    <p class="text-base text-gray-600 mb-6 leading-relaxed">
+                        Apply, communicate, and track your journey without chasing emails or navigating confusion. Less time figuring out the system, more time preparing for your teaching career.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary/20 text-primary rounded flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <p class="text-sm text-gray-700 font-medium">One application for multiple courses</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary/20 text-primary rounded flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <p class="text-sm text-gray-700 font-medium">Track every step of your journey</p>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary/20 text-primary rounded flex items-center justify-center mr-3">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <p class="text-sm text-gray-700 font-medium">Secure, verifiable certificates forever</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Numbers That Matter Section - Consistent Theme -->
+    <section class="py-16 md:py-20 bg-gradient-to-br from-gray-100 to-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 animated-section">
+                    <div class="inline-flex items-center px-3 py-1 bg-primary/10 text-primary rounded-full font-medium text-xs mb-4">
+                        <i data-lucide="trending-up" class="w-3 h-3 mr-1.5"></i>
+                        The Current Reality
+                    </div>
+                    <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+                        The Problem With <span class="gradient-text">Today</span>
+                    </h2>
+                    <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                        These aren't just numbers. They're hours of your life.
+                    </p>
+                </div>
+                
+                <!-- Problem Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto animated-section">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">25</div>
+                        <p class="text-sm text-gray-600">Average emails to complete one application</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">3</div>
+                        <p class="text-sm text-gray-600">Different systems centers juggle daily</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2">65%</div>
+                        <p class="text-sm text-gray-600">Of time wasted on administration</p>
+                    </div>
+                </div>
+                
+                <!-- Transition Message -->
+                <div class="bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-8 mb-12 max-w-3xl mx-auto text-center animated-section">
+                    <p class="text-lg md:text-xl font-light text-gray-700 mb-3">
+                        What if we told you
+                    </p>
+                    <p class="text-xl md:text-2xl font-bold">
+                        <span class="gradient-text">All of this goes to zero?</span>
+                    </p>
+                </div>
+                
+                <!-- Solution Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto animated-section">
+                    <div class="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl border border-primary/10 text-center hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">1</div>
+                        <p class="text-sm font-medium text-gray-700">Platform for everything</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl border border-primary/10 text-center hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">0</div>
+                        <p class="text-sm font-medium text-gray-700">Lost applications</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl border border-primary/10 text-center hover:shadow-lg transition-all duration-300">
+                        <div class="text-3xl md:text-4xl font-bold gradient-text mb-2">∞</div>
+                        <p class="text-sm font-medium text-gray-700">Possibilities</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12 animated-section">
+                    <p class="text-base md:text-lg text-gray-600">
+                        This is what happens when you reimagine everything
+                    </p>
+                    <p class="text-sm text-gray-500 mt-2">
+                        from the ground up.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Revolution Section - Steve Jobs Style -->
+    <section class="py-20 md:py-32 bg-black text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-transparent"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold mb-8 animated-section">
+                    This Changes <span class="gradient-text">Everything</span>
+                </h2>
+                
+                <div class="space-y-12 animated-section">
+                    <!-- The Problem -->
+                    <div>
+                        <p class="text-xl md:text-2xl font-light leading-relaxed mb-6">
+                            For decades, ELT training has been stuck in the past.
+                        </p>
+                        <p class="text-lg md:text-xl text-gray-400 leading-relaxed">
+                            Endless emails, Lost applications, Disconnected systems, <br class="hidden md:block">
+                            Centers drowning in administration, Trainees lost in confusion.
+                        </p>
+                    </div>
+                    
+                    <!-- The Vision -->
+                    <div class="my-16">
+                        <p class="text-2xl md:text-3xl font-light mb-4">
+                            We asked ourselves a simple question:
+                        </p>
+                        <p class="text-3xl md:text-3xl font-bold gradient-text">
+                            What if the chaos could become a single, seamless flow?
+                        </p>
+                    </div>
+                    
+                    <!-- The Revolution -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left max-w-3xl mx-auto">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                                <i data-lucide="building" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">For Training Centers</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                No more juggling. No more lost time. One intelligent platform that understands your workflow and amplifies your impact, giving you time to focus on what you do best: delivering world-class teacher training.
+                            </p>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg flex items-center justify-center">
+                                <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">For Future Teachers</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Your journey to becoming a teacher shouldn't be harder than teaching itself. One account, Every course you need, in one place, Real-time updates. Finally, technology that respects your time and ambition.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- The Impact -->
+                    <div class="mt-16">
+                        <p class="text-xl md:text-2xl font-light mb-8">
+                            This isn't just another platform.
+                        </p>
+                        <p class="text-2xl md:text-3xl font-bold">
+                            It's the beginning of what ELT training <br class="hidden md:block">
+                            was always meant to be.
+                        </p>
+                    </div>
+                    
+                    <!-- Cambridge Mention -->
+                    <div class="mt-12 pt-8 border-t border-gray-800">
+                        <p class="text-sm text-gray-400">
+                            Launching September 13, 2025 at Cambridge University
+                        </p>
+                        <p class="text-xs text-gray-500 mt-2">
+                            Where the future of education begins
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 md:py-32 bg-white relative">
+    <section id="features" class="py-16 md:py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full font-semibold text-sm mb-6 animated-section">
-                    <i data-lucide="zap" class="w-4 h-4 mr-2"></i>
-                    Powerful Features
-                </div>
-                <h2 class="text-4xl md:text-6xl font-black text-gray-900 mb-6 animated-section">
-                    Built for <span class="gradient-text">Modern</span> Education
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <h2 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4 animated-section">
+                    Everything You Need, <span class="gradient-text">Nothing You Don't</span>
                 </h2>
-                <p class="text-xl text-gray-600 leading-relaxed animated-section">
-                    Every feature designed with your success in mind - from AI-powered assessments to seamless communication.
+                <p class="text-base text-gray-600 animated-section">
+                    Powerful features designed for real-world use.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-                <!-- Feature Card 1 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="brain" class="w-8 h-8"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="brain" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">AI-Powered Assessments</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Advanced AI prescreening with automated language evaluation, writing analysis, and intelligent application routing.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">AI Assessment Engine</h3>
+                    <p class="text-sm text-gray-600 mb-3">Intelligent prescreening with automated language evaluation and smart routing.</p>
                 </div>
 
-                <!-- Feature Card 2 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="calendar-check" class="w-8 h-8"></i>
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Smart Scheduling</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Google Calendar integration, automated reminders, flexible slot management, and real-time availability tracking.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Smart Scheduling</h3>
+                    <p class="text-sm text-gray-600 mb-3">Seamless calendar integration with automated reminders and real-time availability.</p>
                 </div>
 
-                <!-- Feature Card 3 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="shield-check" class="w-8 h-8"></i>
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="shield-check" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Secure Communication</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Encrypted messaging, automated notifications, application-based threads, and comprehensive conversation history.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Secure Communication</h3>
+                    <p class="text-sm text-gray-600 mb-3">End-to-end encrypted messaging with threaded conversations and history.</p>
                 </div>
 
-                <!-- Feature Card 4 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="bar-chart-3" class="w-8 h-8"></i>
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Advanced Analytics</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Real-time dashboards, conversion tracking, demographic insights, and comprehensive performance metrics.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Analytics Dashboard</h3>
+                    <p class="text-sm text-gray-600 mb-3">Real-time insights and performance metrics that matter for decision-making.</p>
                 </div>
 
-                <!-- Feature Card 5 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="award" class="w-8 h-8"></i>
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="award" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Certificate Management</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Automated certificate generation, bulk processing, public verification system, and template customization.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Certificate System</h3>
+                    <p class="text-sm text-gray-600 mb-3">Automated generation with blockchain verification and permanent accessibility.</p>
                 </div>
 
-                <!-- Feature Card 6 -->
-                <div class="feature-card group p-8 bg-gradient-to-br from-white to-gray-50 rounded-3xl shadow-lg hover:shadow-2xl border border-gray-100 animated-section">
-                    <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-accent/20 text-primary rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="users" class="w-8 h-8"></i>
+                <div class="feature-card p-6 bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg hover:shadow-xl border border-gray-100 animated-section">
+                    <div class="w-12 h-12 bg-primary/20 text-primary rounded-lg flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-6 h-6"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Multi-Role Access</h3>
-                    <p class="text-gray-600 leading-relaxed mb-4">Granular permissions for admins, tutors, staff, and students with comprehensive audit logging and security.</p>
-                    <div class="flex items-center text-primary font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                        <span class="text-sm">Learn more</span>
-                        <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
-                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Role Management</h3>
+                    <p class="text-sm text-gray-600 mb-3">Granular permissions with comprehensive audit logging and security.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section id="benefits" class="py-20 md:py-32 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <div class="inline-flex items-center px-4 py-2 bg-accent/10 text-accent rounded-full font-semibold text-sm mb-6 animated-section">
-                    <i data-lucide="trending-up" class="w-4 h-4 mr-2"></i>
-                    Why Choose Eltica
-                </div>
-                <h2 class="text-4xl md:text-6xl font-black text-gray-900 mb-6 animated-section">
-                    Built for <span class="gradient-text">Excellence</span>
-                </h2>
-                <p class="text-xl text-gray-600 leading-relaxed animated-section">
-                    Join leading training centers already transforming their operations with cutting-edge technology.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
-                <!-- Benefits List -->
-                <div class="space-y-8 animated-section">
-                    <div class="flex items-start group">
-                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-green-100 to-green-200 text-green-600 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="rocket" class="w-7 h-7"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold text-gray-900 mb-3">10x Faster Processing</h4>
-                            <p class="text-gray-600 text-lg leading-relaxed">Automate application workflows from submission to enrollment with AI-powered assessments and intelligent routing.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start group">
-                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-200 text-blue-600 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="shield" class="w-7 h-7"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold text-gray-900 mb-3">Enterprise Security</h4>
-                            <p class="text-gray-600 text-lg leading-relaxed">Military-grade encryption, session-based authentication, and comprehensive audit logging for complete data protection.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start group">
-                        <div class="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 text-purple-600 rounded-2xl flex items-center justify-center mr-6 group-hover:scale-110 transition-transform duration-300">
-                            <i data-lucide="settings" class="w-7 h-7"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-2xl font-bold text-gray-900 mb-3">Fully Customizable</h4>
-                            <p class="text-gray-600 text-lg leading-relaxed">Adapt every aspect to your center's needs with dynamic forms, custom workflows, and flexible role management.</p>
-                        </div>
-                    </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20 bg-gradient-to-br from-primary via-primary-dark to-accent">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center text-white mb-10">
+                    <h2 class="text-2xl md:text-4xl font-bold mb-4">The Future of ELT Training Starts Here</h2>
+                    <p class="text-base text-white/90">Join the revolution. Be among the first to experience what's possible.</p>
                 </div>
                 
-                <!-- Stats Grid -->
-                <div class="grid grid-cols-2 gap-6 animated-section">
-                    <div class="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
-                        <div class="text-5xl font-black gradient-text mb-4 group-hover:scale-110 transition-transform duration-300">50+</div>
-                        <div class="text-gray-600 font-semibold uppercase tracking-wider text-sm">API Endpoints</div>
-                    </div>
-                    <div class="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
-                        <div class="text-5xl font-black gradient-text mb-4 group-hover:scale-110 transition-transform duration-300">15+</div>
-                        <div class="text-gray-600 font-semibold uppercase tracking-wider text-sm">Status Types</div>
-                    </div>
-                    <div class="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
-                        <div class="text-5xl font-black gradient-text mb-4 group-hover:scale-110 transition-transform duration-300">5</div>
-                        <div class="text-gray-600 font-semibold uppercase tracking-wider text-sm">User Roles</div>
-                    </div>
-                    <div class="text-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group hover:scale-105">
-                        <div class="text-5xl font-black gradient-text mb-4 group-hover:scale-110 transition-transform duration-300">24/7</div>
-                        <div class="text-gray-600 font-semibold uppercase tracking-wider text-sm">Support</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Form Section -->
-    <section id="contact" class="py-20 md:py-32 bg-gradient-to-br from-primary via-primary-dark to-accent relative overflow-hidden">
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-0 w-full h-full bg-black/10"></div>
-            <div class="absolute top-10 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                <!-- Left Side: Text -->
-                <div class="text-center lg:text-left text-white animated-section">
-                    <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur rounded-full font-semibold text-sm mb-8">
-                        <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
-                        Get In Touch
-                    </div>
-                    <h2 class="text-4xl md:text-6xl font-black leading-tight mb-6">
-                        Ready to Transform Your Operations?
-                    </h2>
-                    <p class="text-xl text-white/90 mb-8 leading-relaxed">
-                        Join our waiting list to be the first to experience the future of training center management when we launch in September.
-                    </p>
+                <form id="contactForm" class="bg-white/95 p-8 rounded-xl shadow-xl max-w-md mx-auto">
                     <div class="space-y-4">
-                        <div class="flex items-center">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-accent-light mr-4"></i>
-                            <span class="text-lg">Free 30-day trial</span>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" name="name" required placeholder="John Doe" class="form-input w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none">
                         </div>
-                        <div class="flex items-center">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-accent-light mr-4"></i>
-                            <span class="text-lg">Setup assistance included</span>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                            <input type="email" name="email" required placeholder="john@example.com" class="form-input w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none">
                         </div>
-                        <div class="flex items-center">
-                            <i data-lucide="check-circle" class="w-6 h-6 text-accent-light mr-4"></i>
-                            <span class="text-lg">No long-term commitment</span>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Organization</label>
+                            <input type="text" name="organization" placeholder="Your training center or school" class="form-input w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none">
                         </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+                            <textarea name="message" required rows="3" placeholder="Tell us about your needs..." class="form-input w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-primary-dark text-white py-3 rounded-lg font-semibold text-sm hover:shadow-xl transition-all duration-300">
+                            Reserve Your Spot
+                        </button>
                     </div>
-                </div>
-                
-                <!-- Right Side: Contact Form -->
-                <div class="max-w-lg mx-auto w-full animated-section">
-                    <form id="contactForm" class="bg-white/95 backdrop-blur p-8 md:p-10 rounded-3xl shadow-2xl border border-white/20">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">Contact Us</h3>
-                        <div class="space-y-6">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
-                                    <input type="text" id="name" name="name" required 
-                                           class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-300 text-gray-800 font-medium">
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
-                                    <input type="email" id="email" name="email" required 
-                                           class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-300 text-gray-800 font-medium">
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="organization" class="block text-sm font-semibold text-gray-700 mb-2">Organization</label>
-                                    <input type="text" id="organization" name="organization" 
-                                           class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-300 text-gray-800 font-medium">
-                                </div>
-                                <div>
-                                    <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">Your Role</label>
-                                    <input type="text" id="role" name="role" placeholder="e.g., Director, Manager" 
-                                           class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-300 text-gray-800 font-medium">
-                                </div>
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
-                                <textarea id="message" name="message" rows="4" required placeholder="Tell us about your training center and how we can help..."
-                                          class="form-input w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none transition-all duration-300 resize-none text-gray-800 font-medium"></textarea>
-                            </div>
-                            <div id="form-message" class="text-center p-4 rounded-xl hidden font-semibold"></div>
-                            <button type="submit" id="submitBtn" 
-                                    class="w-full bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 flex items-center justify-center">
-                                <span id="submitText">Send Message</span>
-                                <i data-lucide="send" class="w-5 h-5 ml-2" id="submitIcon"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-16">
-        <div class="container mx-auto px-4">
-            <div class="text-center max-w-2xl mx-auto">
-                <div class="text-4xl font-black gradient-text mb-6">Eltica</div>
-                <p class="text-gray-400 text-lg mb-8">Empowering education through innovative technology solutions.</p>
-                <div class="flex justify-center space-x-6 mb-8">
-                    <a href="mailto:info@eltica.org" class="flex items-center px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl transition-colors duration-300">
-                        <i data-lucide="mail" class="w-5 h-5 mr-2"></i>
-                        <span>info@eltica.org</span>
-                    </a>
-                </div>
-                <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-500">&copy; 2024 Eltica. All rights reserved.</p>
-                    <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" class="text-gray-500 hover:text-white transition-colors duration-300">Privacy Policy</a>
-                        <a href="#" class="text-gray-500 hover:text-white transition-colors duration-300">Terms of Service</a>
-                    </div>
-                </div>
-            </div>
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="text-2xl font-bold gradient-text mb-3">ELTica</div>
+            <p class="text-gray-400 text-sm mb-4">The new standard for ELT training management.</p>
+            <p class="text-gray-500 text-xs">&copy; 2024 ELTica. All rights reserved.</p>
         </div>
     </footer>
 
@@ -480,184 +764,136 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const closeMenuBtn = document.getElementById('closeMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+        // Countdown Timer
+        function updateCountdown() {
+            const launchDate = new Date('September 13, 2025 15:30:00 GMT').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
 
-        function openMobileMenu() {
-            mobileMenu.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
         }
 
-        function closeMobileMenu() {
-            mobileMenu.classList.remove('is-open');
-            document.body.style.overflow = '';
-        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
 
-        mobileMenuBtn.addEventListener('click', openMobileMenu);
-        closeMenuBtn.addEventListener('click', closeMobileMenu);
-
-        // Close menu when clicking outside
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                closeMobileMenu();
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                    closeMobileMenu();
-                }
-            });
-        });
-
-        // EmailJS Configuration
-        // TODO: Replace these with your actual EmailJS credentials
-        const EMAILJS_PUBLIC_KEY = 'bHdkxO1fKi4fGUndp'; // Get from EmailJS dashboard
-        const EMAILJS_SERVICE_ID = 'service_bgxu7d1'; // Your email service (gmail, outlook, etc.)
-        const EMAILJS_TEMPLATE_ID = 'template_hpg0i4p'; // Your email template
-
-        // Initialize EmailJS
-        emailjs.init(EMAILJS_PUBLIC_KEY);
-
-        // Form submission with enhanced UX
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const submitText = document.getElementById('submitText');
-        const submitIcon = document.getElementById('submitIcon');
-        const formMessage = document.getElementById('form-message');
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // Update button state
-            submitBtn.disabled = true;
-            submitText.textContent = 'Sending...';
-            submitIcon.setAttribute('data-lucide', 'loader-2');
-            submitIcon.classList.add('animate-spin');
-            lucide.createIcons();
-
-            // Hide previous messages
-            formMessage.className = 'text-center p-4 rounded-xl hidden font-semibold';
-
-            // Get form data
-            const formData = new FormData(contactForm);
-            const templateParams = {
-                from_name: formData.get('name'),
-                from_email: formData.get('email'),
-                organization: formData.get('organization') || 'Not provided',
-                role: formData.get('role') || 'Not provided',
-                message: formData.get('message'),
-                to_email: 'info@eltica.org' // Your receiving email
-            };
-
-            try {
-                // Send email via EmailJS
-                const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-                
-                if (response.status === 200) {
-                    // Show success message
-                    formMessage.textContent = '✅ Message sent successfully! We\'ll get back to you within 24 hours.';
-                    formMessage.className = 'text-center p-4 rounded-xl bg-green-100 text-green-800 block font-semibold';
-                    
-                    // Reset form
-                    contactForm.reset();
-                    
-                    // Auto-hide message after 8 seconds
-                    setTimeout(() => {
-                        formMessage.classList.add('hidden');
-                    }, 8000);
-                } else {
-                    throw new Error('Failed to send message');
-                }
-                
-            } catch (error) {
-                console.error('EmailJS Error:', error);
-                
-                // Show error message with fallback
-                formMessage.innerHTML = `
-                    <div>❌ Unable to send message automatically.</div>
-                    <div class="mt-2">Please email us directly at: 
-                        <a href="mailto:info@eltica.org" class="text-blue-600 underline">info@eltica.org</a>
-                    </div>
-                `;
-                formMessage.className = 'text-center p-4 rounded-xl bg-red-100 text-red-800 block font-semibold';
-                
-                // Also try fallback mailto
-                const subject = encodeURIComponent('Eltica Platform Inquiry');
-                const body = encodeURIComponent(`Name: ${templateParams.from_name}
-Email: ${templateParams.from_email}
-Organization: ${templateParams.organization}
-Role: ${templateParams.role}
-
-Message:
-${templateParams.message}`);
-                
-                setTimeout(() => {
-                    window.location.href = `mailto:info@eltica.org?subject=${subject}&body=${body}`;
-                }, 3000);
-                
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitText.textContent = 'Send Message';
-                submitIcon.setAttribute('data-lucide', 'send');
-                submitIcon.classList.remove('animate-spin');
-                lucide.createIcons();
-            }
-        });
-
-        // Enhanced intersection observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Add staggered delay for multiple elements
-                    setTimeout(() => {
-                        entry.target.classList.add('is-visible');
-                    }, index * 100);
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('is-visible');
+                    // Trigger value prop animations
+                    if (entry.target.querySelector('.value-prop-card')) {
+                        entry.target.querySelectorAll('.value-prop-card').forEach(card => {
+                            card.style.animation = 'slideUp 0.6s ease-out forwards';
+                        });
+                    }
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Observe all animated sections
         document.querySelectorAll('.animated-section').forEach(section => {
             observer.observe(section);
         });
 
-        // Add scroll-based header styling
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            const currentScrollY = window.scrollY;
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const menuIcon = mobileMenuBtn.querySelector('i');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('is-open');
             
-            if (currentScrollY > 100) {
-                header.classList.add('shadow-xl');
+            if (isOpen) {
+                mobileMenu.classList.remove('is-open');
+                document.body.style.overflow = 'auto';
+                // Change icon back to menu
+                menuIcon.setAttribute('data-lucide', 'menu');
             } else {
-                header.classList.remove('shadow-xl');
+                mobileMenu.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                // Change icon to X
+                menuIcon.setAttribute('data-lucide', 'x');
             }
             
-            lastScrollY = currentScrollY;
+            // Re-render the icon
+            lucide.createIcons();
         });
 
-        // Add loading state management
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
+        // Also handle the close button inside the menu
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = 'auto';
+            menuIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('is-open');
+                document.body.style.overflow = 'auto';
+                menuIcon.setAttribute('data-lucide', 'menu');
+                lucide.createIcons();
+            });
+        });
+
+        // Form submission with modal
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show success modal
+            successModal.classList.add('is-open');
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Re-initialize icons in modal
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+        });
+
+        closeModal.addEventListener('click', () => {
+            successModal.classList.remove('is-open');
+        });
+
+        // Close modal when clicking outside
+        successModal.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.classList.remove('is-open');
+            }
+        });
+
+        // Form validation visual feedback
+        const formInputs = document.querySelectorAll('.form-input');
+        
+        formInputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                if (input.hasAttribute('required') && !input.value) {
+                    input.style.borderColor = '#ef4444';
+                } else if (input.value) {
+                    input.style.borderColor = '#10b981';
+                }
+            });
+            
+            input.addEventListener('focus', () => {
+                input.style.borderColor = '#7950F2';
+            });
         });
     </script>
 </body>
