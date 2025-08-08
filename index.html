@@ -11,7 +11,14 @@
     <!-- Load Lucide icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Load EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<!-- Load EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS with your public key
+    (function() {
+        emailjs.init("bHdkxO1fKi4fGUndp"); // Replace with your actual EmailJS public key
+    })();
+</script>
     <script>
         tailwind.config = {
             theme: {
@@ -848,13 +855,27 @@
             });
         });
 
-        // Form submission with modal
-        const contactForm = document.getElementById('contactForm');
-        const successModal = document.getElementById('successModal');
-        const closeModal = document.getElementById('closeModal');
+// Form submission with modal and EmailJS
+const contactForm = document.getElementById('contactForm');
+const successModal = document.getElementById('successModal');
+const closeModal = document.getElementById('closeModal');
 
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Prepare the email parameters
+    const templateParams = {
+        from_name: contactForm.name.value,
+        from_email: contactForm.email.value,
+        organization: contactForm.organization.value || 'Not specified',
+        message: contactForm.message.value,
+        to_name: 'ELTica Team', // Your name or team name
+    };
+    
+    // Send email using EmailJS
+    emailjs.send('service_bgxu7d1', 'template_hpg0i4p', templateParams)
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
             
             // Show success modal
             successModal.classList.add('is-open');
@@ -866,7 +887,11 @@
             setTimeout(() => {
                 lucide.createIcons();
             }, 100);
+        }, function(error) {
+            console.log('FAILED...', error);
+            alert('Sorry, there was an error sending your message. Please try again later.');
         });
+});
 
         closeModal.addEventListener('click', () => {
             successModal.classList.remove('is-open');
