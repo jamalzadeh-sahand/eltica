@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ELTica - The Future of ELT Training Management</title>
+    
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Load Inter and Poppins fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
     <!-- Load Lucide icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    
     <!-- Load EmailJS -->
-<!-- Load EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-    // Initialize EmailJS with your public key
-    (function() {
-        emailjs.init("bHdkxO1fKi4fGUndp"); // Replace with your actual EmailJS public key
-    })();
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("bHdkxO1fKi4fGUndp");
+        })();
+    </script>
+    
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -29,67 +33,121 @@
                         'primary-light': '#9B7EF5',
                         accent: '#4ECDC4',
                         'accent-light': '#7FDBDA',
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'slide-up': 'slideUp 0.6s ease-out',
-                        'fade-in': 'fadeIn 0.6s ease-out',
-                        'scale-in': 'scaleIn 0.5s ease-out',
-                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(50px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        scaleIn: {
-                            '0%': { transform: 'scale(0.9)', opacity: '0' },
-                            '100%': { transform: 'scale(1)', opacity: '1' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(121, 80, 242, 0.3)' },
-                            '50%': { boxShadow: '0 0 40px rgba(121, 80, 242, 0.6)' },
-                        }
                     }
                 }
             }
         }
     </script>
+    
+    <!-- Custom Styles -->
     <style>
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
         }
+        
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
         }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes slideUp {
+            0% { 
+                transform: translateY(50px); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: translateY(0); 
+                opacity: 1; 
+            }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            0% { 
+                transform: scale(0.9); 
+                opacity: 0; 
+            }
+            100% { 
+                transform: scale(1); 
+                opacity: 1; 
+            }
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(121, 80, 242, 0.3); 
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(121, 80, 242, 0.6); 
+            }
+        }
+        
+        /* Animation classes */
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease-out;
+        }
+        
+        .animate-pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        /* Glass effect */
         .glass-effect {
             backdrop-filter: blur(20px);
             background: rgba(255, 255, 255, 0.95);
         }
+        
+        /* Animated sections */
         .animated-section {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .animated-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Feature card hover */
         .feature-card {
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
+        
+        /* Mobile menu */
         .mobile-menu {
             position: fixed;
             top: 0;
@@ -105,9 +163,11 @@
             transform: translateY(-100%);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
         .mobile-menu.is-open {
             transform: translateY(0);
         }
+        
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
@@ -120,33 +180,48 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
+        
         .mobile-menu-overlay.is-open {
             opacity: 1;
             visibility: visible;
         }
+        
+        /* Form inputs */
         .form-input {
             transition: all 0.3s ease;
         }
+        
         .form-input:focus {
             box-shadow: 0 0 0 3px rgba(121, 80, 242, 0.1);
             border-color: #7950F2;
             transform: translateY(-2px);
         }
+        
+        /* Gradient text */
         .gradient-text {
             background: linear-gradient(135deg, #7950F2 0%, #4ECDC4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* Floating shapes */
         .floating-shape {
             position: absolute;
             border-radius: 50%;
             background: linear-gradient(135deg, rgba(121, 80, 242, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
             animation: float 8s ease-in-out infinite;
         }
+        
         .floating-shape:nth-child(1) { animation-delay: 0s; }
         .floating-shape:nth-child(2) { animation-delay: 2s; }
         .floating-shape:nth-child(3) { animation-delay: 4s; }
+        
+        /* Diagonal sections */
+        .diagonal-section {
+            position: relative;
+        }
+        
         .diagonal-section::before {
             content: '';
             position: absolute;
@@ -158,6 +233,7 @@
             transform: skewY(-2deg);
             transform-origin: top left;
         }
+        
         .diagonal-section::after {
             content: '';
             position: absolute;
@@ -169,17 +245,15 @@
             transform: skewY(-2deg);
             transform-origin: bottom left;
         }
+        
+        /* Value prop cards */
         .value-prop-card {
             animation: slideUp 0.6s ease-out forwards;
             animation-delay: var(--delay);
             opacity: 0;
         }
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        
+        /* Modal */
         .modal {
             position: fixed;
             top: 0;
@@ -195,10 +269,12 @@
             visibility: hidden;
             transition: all 0.3s ease;
         }
+        
         .modal.is-open {
             opacity: 1;
             visibility: visible;
         }
+        
         .modal-content {
             background: white;
             padding: 2rem;
@@ -208,29 +284,40 @@
             transform: scale(0.9);
             transition: transform 0.3s ease;
         }
+        
         .modal.is-open .modal-content {
             transform: scale(1);
         }
+        
+        /* Navigation hover */
+        nav a {
+            transition: transform 0.3s ease;
+        }
+        
         nav a:hover {
             transform: translateY(-2px);
         }
+        
+        /* Icon hover */
         .icon-hover {
             transition: all 0.3s ease;
         }
+        
         .icon-hover:hover {
             transform: scale(1.1);
         }
     </style>
 </head>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLQHNS2HS3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-VLQHNS2HS3');
 </script>
+
 <body class="bg-gray-100 text-gray-800 overflow-x-hidden">
     
     <!-- Floating Background Shapes -->
@@ -248,7 +335,6 @@
             <span class="text-xs sm:text-sm font-semibold">
                 Historic Launch at Cambridge University | Clare College | Sept 13, 2025
             </span>
-          
         </div>
     </div>
 
@@ -260,9 +346,9 @@
         
         <div class="text-center text-white px-8">
             <div class="flex justify-center items-center mb-2">
-    <img src="logo.png" alt="ELTica Logo" class="h-8 mb-2">
-</div>
-<h2 class="text-2xl font-bold">ELTica</h2>
+                <img src="logo.png" alt="ELTica Logo" class="h-8 mb-2">
+            </div>
+            <h2 class="text-2xl font-bold">ELTica</h2>
             <p class="text-sm opacity-90 mb-8">The new standard for ELT training management.</p>
             
             <nav class="space-y-4 mb-8">
@@ -283,13 +369,12 @@
                     <i data-lucide="linkedin" class="w-5 h-5"></i>
                 </a>
                 <a href="https://www.youtube.com/channel/UCFvwPAjlT5ZxDg77Ni9PTMg" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
-                    <i data-lucide="YouTube" class="w-5 h-5"></i>
+                    <i data-lucide="youtube" class="w-5 h-5"></i>
                 </a>
                 <a href="https://facebook.com/eltica.official" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
                     <i data-lucide="facebook" class="w-5 h-5"></i>
                 </a>
-                
-                  <a href="https://www.instagram.com/eltica_official/" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
+                <a href="https://www.instagram.com/eltica_official/" class="bg-white/20 p-3 rounded-full hover:bg-white/30 transition-colors">
                     <i data-lucide="instagram" class="w-5 h-5"></i>
                 </a>
             </div>
@@ -313,9 +398,9 @@
     <!-- Header & Navigation -->
     <header class="glass-effect shadow-lg sticky top-0 z-50 border-b border-gray-200/50">
         <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
-         <a href="#" class="hover:scale-105 transition-transform duration-300">
-    <img src="logo.png" alt="ELTica Logo" class="h-12 md:h-8">
-</a>
+            <a href="#" class="hover:scale-105 transition-transform duration-300">
+                <img src="logo.png" alt="ELTica Logo" class="h-12 md:h-8">
+            </a>
             <div class="hidden md:flex items-center space-x-6">
                 <a href="#features" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">Features</a>
                 <a href="#for-centers" class="text-gray-600 hover:text-primary font-medium text-sm transition-all duration-300">For Centers</a>
@@ -347,10 +432,8 @@
                 <p class="text-base md:text-lg text-gray-600 max-w-3xl mx-auto mb-8 leading-relaxed animated-section">
                     One intelligent platform that brings training centers and trainees together to connect with purpose, collaborate without barriers, and move forward with clarity. No wasted time. No repeated work. No roadblocks. Just the shortest path from potential to achievement.
                 </p>
-                
-      
 
-                <!-- Cambridge Launch Event - Minimal -->
+                <!-- Cambridge Launch Event -->
                 <div class="bg-white border border-primary/20 rounded-xl p-5 max-w-2xl mx-auto mb-8 shadow-lg animated-section">
                     <div class="text-center mb-4">
                         <h3 class="text-lg font-bold text-gray-900 mb-2">
@@ -525,7 +608,7 @@
         </div>
     </section>
 
-    <!-- The Numbers That Matter Section - Consistent Theme -->
+    <!-- The Numbers That Matter Section -->
     <section class="py-16 md:py-20 bg-gradient-to-br from-gray-100 to-white">
         <div class="container mx-auto px-4">
             <div class="max-w-6xl mx-auto">
@@ -583,20 +666,11 @@
                         <p class="text-sm font-medium text-gray-700">Possibilities</p>
                     </div>
                 </div>
-                
-                <div class="text-center mt-12 animated-section">
-                    <p class="text-base md:text-lg text-gray-600">
-                        This is what happens when you reimagine everything
-                    </p>
-                    <p class="text-sm text-gray-500 mt-2">
-                        from the ground up.
-                    </p>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- The Revolution Section - Steve Jobs Style -->
+    <!-- The Revolution Section -->
     <section class="py-20 md:py-32 bg-black text-white relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/10 to-transparent"></div>
         <div class="container mx-auto px-4 relative z-10">
@@ -606,7 +680,6 @@
                 </h2>
                 
                 <div class="space-y-12 animated-section">
-                    <!-- The Problem -->
                     <div>
                         <p class="text-xl md:text-2xl font-light leading-relaxed mb-6">
                             For decades, ELT training has been stuck in the past.
@@ -617,7 +690,6 @@
                         </p>
                     </div>
                     
-                    <!-- The Vision -->
                     <div class="my-16">
                         <p class="text-2xl md:text-3xl font-light mb-4">
                             We asked ourselves a simple question:
@@ -627,7 +699,6 @@
                         </p>
                     </div>
                     
-                    <!-- The Revolution -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-left max-w-3xl mx-auto">
                         <div class="space-y-4">
                             <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
@@ -635,7 +706,7 @@
                             </div>
                             <h3 class="text-xl font-bold">For Training Centers</h3>
                             <p class="text-gray-300 leading-relaxed">
-                                No more juggling. No more lost time. One intelligent platform that understands your workflow and amplifies your impact, giving you time to focus on what you do best: delivering world-class teacher training.
+                                No more juggling. No more lost time. One intelligent platform that understands your workflow and amplifies your impact.
                             </p>
                         </div>
                         <div class="space-y-4">
@@ -644,12 +715,11 @@
                             </div>
                             <h3 class="text-xl font-bold">For Future Teachers</h3>
                             <p class="text-gray-300 leading-relaxed">
-                                Your journey to becoming a teacher shouldn't be harder than teaching itself. One account, Every course you need, in one place, Real-time updates. Finally, technology that respects your time and ambition.
+                                Your journey to becoming a teacher shouldn't be harder than teaching itself. One account, every course, real-time updates.
                             </p>
                         </div>
                     </div>
                     
-                    <!-- The Impact -->
                     <div class="mt-16">
                         <p class="text-xl md:text-2xl font-light mb-8">
                             This isn't just another platform.
@@ -660,7 +730,6 @@
                         </p>
                     </div>
                     
-                    <!-- Cambridge Mention -->
                     <div class="mt-12 pt-8 border-t border-gray-800">
                         <p class="text-sm text-gray-400">
                             Launching September 13, 2025 at Cambridge University
@@ -778,9 +847,8 @@
     <footer class="bg-gray-900 text-white py-8">
         <div class="container mx-auto px-4 text-center">
             <div class="flex justify-center items-center mb-3">
-    <img src="logo.png" alt="ELTica Logo" class="h-8 mr-2">
-   
-</div>
+                <img src="logo.png" alt="ELTica Logo" class="h-8 mr-2">
+            </div>
             <p class="text-gray-400 text-sm mb-4">The new standard for ELT training management.</p>
             <p class="text-gray-500 text-xs">&copy; 2024 ELTica. All rights reserved.</p>
         </div>
@@ -817,12 +885,6 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    // Trigger value prop animations
-                    if (entry.target.querySelector('.value-prop-card')) {
-                        entry.target.querySelectorAll('.value-prop-card').forEach(card => {
-                            card.style.animation = 'slideUp 0.6s ease-out forwards';
-                        });
-                    }
                 }
             });
         }, { threshold: 0.1 });
@@ -842,20 +904,17 @@
             if (isOpen) {
                 mobileMenu.classList.remove('is-open');
                 document.body.style.overflow = 'auto';
-                // Change icon back to menu
                 menuIcon.setAttribute('data-lucide', 'menu');
             } else {
                 mobileMenu.classList.add('is-open');
                 document.body.style.overflow = 'hidden';
-                // Change icon to X
                 menuIcon.setAttribute('data-lucide', 'x');
             }
             
-            // Re-render the icon
             lucide.createIcons();
         });
 
-        // Also handle the close button inside the menu
+        // Close button inside the menu
         const mobileMenuClose = document.getElementById('mobileMenuClose');
         mobileMenuClose.addEventListener('click', () => {
             mobileMenu.classList.remove('is-open');
@@ -874,43 +933,35 @@
             });
         });
 
-// Form submission with modal and EmailJS
-const contactForm = document.getElementById('contactForm');
-const successModal = document.getElementById('successModal');
-const closeModal = document.getElementById('closeModal');
+        // Form submission with modal and EmailJS
+        const contactForm = document.getElementById('contactForm');
+        const successModal = document.getElementById('successModal');
+        const closeModal = document.getElementById('closeModal');
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Prepare the email parameters
-    const templateParams = {
-        from_name: contactForm.name.value,
-        from_email: contactForm.email.value,
-        organization: contactForm.organization.value || 'Not specified',
-        message: contactForm.message.value,
-        to_name: 'ELTica Team', // Your name or team name
-    };
-    
-    // Send email using EmailJS
-    emailjs.send('service_bgxu7d1', 'template_hpg0i4p', templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             
-            // Show success modal
-            successModal.classList.add('is-open');
+            const templateParams = {
+                from_name: contactForm.name.value,
+                from_email: contactForm.email.value,
+                organization: contactForm.organization.value || 'Not specified',
+                message: contactForm.message.value,
+                to_name: 'ELTica Team',
+            };
             
-            // Reset form
-            contactForm.reset();
-            
-            // Re-initialize icons in modal
-            setTimeout(() => {
-                lucide.createIcons();
-            }, 100);
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Sorry, there was an error sending your message. Please try again later.');
+            emailjs.send('service_bgxu7d1', 'template_hpg0i4p', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    successModal.classList.add('is-open');
+                    contactForm.reset();
+                    setTimeout(() => {
+                        lucide.createIcons();
+                    }, 100);
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Sorry, there was an error sending your message. Please try again later.');
+                });
         });
-});
 
         closeModal.addEventListener('click', () => {
             successModal.classList.remove('is-open');
